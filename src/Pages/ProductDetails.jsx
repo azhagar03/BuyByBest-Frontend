@@ -434,7 +434,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
                 {/* CTA Buttons */}
                 <div className="d-grid gap-2 mb-4">
                   <button
-                    className="btn btn-warning btn-lg fw-bold d-flex align-items-center justify-content-center gap-2"
+                    className="btn btn-success btn-lg fw-bold d-flex align-items-center justify-content-center gap-2"
                     onClick={handleAddToCart}
                     disabled={isOutOfStock}
                   >
@@ -442,12 +442,8 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
                     Add to Cart
                   </button>
                   <button
-                    className="btn btn-lg fw-bold"
-                    style={{
-                      background: isOutOfStock ? "#ccc" : "#FF9900",
-                      border: "none",
-                      color: "#0F1111",
-                    }}
+                    className="btn btn-lg btn-primary fw-bold"
+               
                     onClick={handleBuyNow}
                     disabled={isOutOfStock}
                   >
@@ -546,7 +542,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
                   <button className="btn btn-light rounded-pill px-4" onClick={() => setShowReviewForm(false)}>
                     Cancel
                   </button>
-                  <button className="btn btn-warning rounded-pill px-4 fw-bold" onClick={handleSubmitReview}>
+                  <button className="btn btn-success rounded-pill px-4 fw-bold" onClick={handleSubmitReview}>
                     Submit Review
                   </button>
                 </div>

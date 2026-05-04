@@ -1,5 +1,6 @@
 import { ShoppingCart, Bell, X } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
+import Logo from "../assets/Logo.png";
 
 const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
   const [notifications, setNotifications]       = useState([]);
@@ -64,27 +65,27 @@ const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
       {/* ── Sidebar ── */}
       <div
         className="text-white d-flex flex-column position-fixed top-0 start-0"
-        style={{ width: 240, height: "100vh", background: "#1a1a2e", zIndex: 1000 }}
+        style={{ width: 240, height: "100vh", background: "#b5b5f0", zIndex: 1000 }}
       >
         {/* Logo */}
         <div className="p-4 border-bottom border-secondary">
-          <div className="d-flex align-items-center gap-2">
             <div
-              className="rounded-circle bg-warning d-flex align-items-center justify-content-center"
-              style={{ width: 36, height: 36 }}
+              className="d-flex align-items-center justify-content-center "
+              style={{ width: 100, height: 36 }}
             >
-              <ShoppingCart size={18} className="text-dark" />
+                <img
+                             src={Logo}
+                             alt="The Indian Commerce"
+                             style={{ height: 90, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(26,79,160,0.18))' }}
+                           />
+                       
             </div>
-            <div>
-              <p className="fw-bold mb-0 fs-6">BuyByBest</p>
-              <p className="mb-0 text-muted" style={{ fontSize: "0.7rem" }}>Admin Panel</p>
-            </div>
+        
           </div>
-        </div>
 
         {/* Nav items */}
         <nav className="flex-grow-1 p-3">
-          <p className="text-muted px-2 mb-2" style={{ fontSize: "0.65rem", letterSpacing: 1 }}>MENU</p>
+          <p className="text-black px-2 mb-2" style={{ fontSize: "0.70rem", letterSpacing: 1 }}>MENU</p>
           {navItems.map((item) => (
             <button
               key={item.key}
@@ -93,8 +94,8 @@ const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
                 borderRadius: 8,
                 fontSize: "0.88rem",
                 border: "none",
-                background: activePage === item.key ? "#ffc107" : "transparent",
-                color:      activePage === item.key ? "#000"    : "rgba(255,255,255,0.6)",
+                background: activePage === item.key ? "#FF7A00" : "transparent",
+                color:      activePage === item.key ? "#000"    : "white",
                 fontWeight: activePage === item.key ? "700"     : "400",
               }}
               onClick={() => onNavigate(item.key)}

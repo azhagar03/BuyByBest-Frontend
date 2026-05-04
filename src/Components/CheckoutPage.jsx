@@ -63,7 +63,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
       ...paymentData,
     };
 
-    const res  = await fetch("https://buybybest-backend-0khu.onrender.com/orders", {
+    const res  = await fetch("https://buybybest-back-end.onrender.com/api/orders", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),
@@ -99,7 +99,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
       const { order: rzpOrder } = await res.json();
 
       const options = {
-        key:         process.env.REACT_APP_RAZORPAY_KEY_ID || "rzp_test_YOUR_KEY_ID",
+        key:         "REACT_APP_RAZORPAY_KEY_ID" ,
         amount:      rzpOrder.amount,
         currency:    "INR",
         name:        "BuyByBest",
@@ -225,7 +225,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
                 View My Orders
               </button>
               <button
-                className="btn btn-warning w-100"
+                className="btn btn-success w-100"
                 onClick={() => onNavigate("home")}
               >
                 Continue Shopping
@@ -243,7 +243,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
       <div className="bg-light min-vh-100 d-flex align-items-center justify-content-center">
         <div className="card border-0 shadow-sm p-5 text-center">
           <h2 className="fw-bold mb-3">Your Cart is Empty</h2>
-          <button className="btn btn-warning btn-lg" onClick={() => onNavigate("home")}>
+          <button className="btn btn-success btn-lg" onClick={() => onNavigate("home")}>
             Continue Shopping
           </button>
         </div>
@@ -347,7 +347,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
                         </select>
                       </div>
                     </div>
-                    <button type="submit" className="btn btn-warning btn-lg w-100 mt-4">
+                    <button type="submit" className="btn btn-success btn-lg w-100 mt-4">
                       Continue to Payment
                     </button>
                   </form>
@@ -411,7 +411,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
 
                   <div className="d-flex gap-2">
                     <button className="btn btn-outline-secondary btn-lg flex-fill" onClick={() => setStep(1)}>Back</button>
-                    <button className="btn btn-warning btn-lg flex-fill" onClick={() => setStep(3)}>Review Order</button>
+                    <button className="btn btn-success btn-lg flex-fill" onClick={() => setStep(3)}>Review Order</button>
                   </div>
                   <div className="mt-3 text-center">
                     <small className="text-muted"><Lock size={13} className="me-1" />100% Secure & Encrypted</small>
@@ -500,7 +500,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
                 <div className="d-flex gap-2">
                   <button className="btn btn-outline-secondary btn-lg flex-fill" onClick={() => setStep(2)}>Back</button>
                   <button
-                    className="btn btn-warning btn-lg flex-fill fw-bold"
+                    className="btn btn-success btn-lg flex-fill fw-bold"
                     onClick={handlePlaceOrder}
                     disabled={placing}
                   >

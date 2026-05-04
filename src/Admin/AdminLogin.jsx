@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../Services/Api";
 import { toast } from "react-toastify";
+import Logo from "../assets/Logo.png";
 
 const AdminLogin = ({ onAdminLogin }) => {
   const [email, setEmail] = useState("");
@@ -34,16 +35,17 @@ const AdminLogin = ({ onAdminLogin }) => {
     <div className="d-flex min-vh-100 align-items-center justify-content-center bg-white px-3 py-5">
       <div className="card p-4" style={{ width: "350px" }}>
        
-   <div className="text-center mb-4">
-          <h1 className="fw-normal" style={{ 
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '2rem',
-            letterSpacing: '-0.5px'
-          }}>
-            <span style={{ color: '#000' }}>BuyByBest</span>
-            <span style={{ color: '#FF9900' }}>.in</span>
-          </h1>
-        </div>
+       <div style={{ textAlign: 'center', marginBottom: 28 }}>
+               <img
+                 src={Logo}
+                 alt="The Indian Commerce"
+                 style={{ height: 90, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(26,79,160,0.18))' }}
+               />
+               <p style={{ color: '#1a4fa0', fontSize: 12, fontWeight: 600, letterSpacing: '0.12em', marginTop: 6, textTransform: 'uppercase' }}>
+                 Connect • Grow • Succeed
+               </p>
+             </div>
+       
          <h3 className="mb-3 text-center fs-5">Admin Login</h3>
         {error && (
           <div className="alert alert-danger" role="alert">
@@ -71,7 +73,7 @@ const AdminLogin = ({ onAdminLogin }) => {
           />
 
           <button 
-            className="btn btn-dark w-100" 
+            className="btn btn-success w-100" 
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}

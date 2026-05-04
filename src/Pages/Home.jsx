@@ -255,7 +255,7 @@ const Home = ({ filters, onSelectProduct, onNavigate, onAddToCart, onViewDetails
                             {/* ✅ Buttons — stopPropagation keeps card click from firing */}
                             <div className="d-flex gap-2">
                               <button
-                                className="btn btn-outline-warning btn-sm flex-fill"
+                                className="btn btn-outline-success btn-sm flex-fill"
                                 style={{ fontSize: "0.72rem", position: "relative", zIndex: 2 }}
                                 disabled={isOutOfStock}
                                 onClick={(e) => {
@@ -268,7 +268,7 @@ const Home = ({ filters, onSelectProduct, onNavigate, onAddToCart, onViewDetails
                               </button>
 
                               <button
-                                className="btn btn-warning btn-sm flex-fill"
+                                className="btn btn-primary btn-sm flex-fill"
                                 style={{ fontSize: "0.72rem", position: "relative", zIndex: 2 }}
                                 disabled={isOutOfStock}
                                 onClick={(e) => {

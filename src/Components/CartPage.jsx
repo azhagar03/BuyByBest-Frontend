@@ -41,7 +41,7 @@ const CartPage = ({ cart, onUpdateCart, onRemoveFromCart, onNavigate }) => {
           <ShoppingCart size={72} className="text-muted mb-4 mx-auto" />
           <h2 className="fw-bold mb-3">Your Cart is Empty</h2>
           <p className="text-muted mb-4">Add some items and come back!</p>
-          <button className="btn btn-warning btn-lg px-5" onClick={() => onNavigate("home")}>
+          <button className="btn btn-success btn-lg px-5" onClick={() => onNavigate("home")}>
             Continue Shopping
           </button>
         </div>
@@ -238,7 +238,7 @@ const CartPage = ({ cart, onUpdateCart, onRemoveFromCart, onNavigate }) => {
                 </div>
 
                 <button
-                  className="btn btn-warning btn-lg w-100 mb-3 d-flex align-items-center justify-content-center gap-2 fw-bold"
+                  className="btn btn-success btn-lg w-100 mb-3 d-flex align-items-center justify-content-center gap-2 fw-bold"
                   onClick={() => onNavigate("checkout")}
                 >
                   Proceed to Checkout

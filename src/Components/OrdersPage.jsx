@@ -44,7 +44,7 @@ const OrdersPage = ({ user, onNavigate }) => {
       <div className="bg-light min-vh-100 d-flex align-items-center justify-content-center">
         <div className="card border-0 shadow-sm p-5 text-center">
           <h4 className="fw-bold mb-3">Please log in to view your orders</h4>
-          <button className="btn btn-warning" onClick={() => onNavigate("login")}>Log In</button>
+          <button className="btn btn-success" onClick={() => onNavigate("login")}>Log In</button>
         </div>
       </div>
     );
@@ -78,7 +78,7 @@ const OrdersPage = ({ user, onNavigate }) => {
               <Package size={64} className="text-muted mb-3" />
               <h5 className="text-muted">No orders yet</h5>
               <p className="text-muted small mb-4">Start shopping and your orders will appear here</p>
-              <button className="btn btn-warning px-4" onClick={() => onNavigate("home")}>
+              <button className="btn btn-success px-4" onClick={() => onNavigate("home")}>
                 Start Shopping
               </button>
             </div>

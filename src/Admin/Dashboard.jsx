@@ -56,7 +56,7 @@ const AdminDashboard = () => {
     <div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">Products Management</h2>
-        <button className="btn btn-warning fw-bold px-4 rounded-pill" onClick={handleAdd}>
+        <button className="btn btn-success fw-bold px-4 rounded-pill" onClick={handleAdd}>
           + Add Product
         </button>
       </div>
@@ -164,7 +164,7 @@ const AdminDashboard = () => {
                       <td>
                         <div className="d-flex gap-2">
                           <button
-                            className="btn btn-sm btn-warning rounded-circle"
+                            className="btn btn-sm btn-success rounded-circle"
                             style={{ width: 34, height: 34 }}
                             title="Edit"
                             onClick={() => handleEdit(product)}

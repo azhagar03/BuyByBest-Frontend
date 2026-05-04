@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../Services/Api";
 import { useToast } from "../Context/ToastContext";
+import Logo from "../assets/Logo.png";
 
 const Login = ({ onNavigate, onLogin }) => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -10,17 +11,13 @@ const Login = ({ onNavigate, onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
     try {
       const data = await api.login(form);
       if (data.token && data.user) {
-        // Store token and user in localStorage
         localStorage.setItem('token', data.token);
         localStorage.setItem('currentUser', JSON.stringify(data.user));
-        
-        // Call the onLogin prop to update App state
         onLogin(data.user);
-                onNavigate("home");
+        onNavigate("home");
       } else {
         showToast(data.message || "Login failed", "error");
       }
@@ -32,171 +29,95 @@ const Login = ({ onNavigate, onLogin }) => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-white px-3 py-5">
-      <div className="w-100" style={{ maxWidth: "350px" }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e8f0fb 0%, #f0f7f1 50%, #fff5ec 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 16px' }}>
+      <div style={{ width: '100%', maxWidth: 380 }}>
+
         {/* Logo */}
-        <div className="text-center mb-4">
-          <h1 className="fw-normal" style={{ 
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '2rem',
-            letterSpacing: '-0.5px'
-          }}>
-            <span style={{ color: '#000' }}>BuyByBest</span>
-            <span style={{ color: '#FF9900' }}>.in</span>
-          </h1>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
+          <img
+            src={Logo}
+            alt="The Indian Commerce"
+            style={{ height: 90, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(26,79,160,0.18))' }}
+          />
+          <p style={{ color: '#1a4fa0', fontSize: 12, fontWeight: 600, letterSpacing: '0.12em', marginTop: 6, textTransform: 'uppercase' }}>
+            Connect • Grow • Succeed
+          </p>
         </div>
 
-        {/* Login Card */}
-        <div className="border rounded p-4" style={{ borderColor: '#ddd' }}>
-          <h1 className="fs-4 fw-normal mb-3">Sign in</h1>
+        {/* Card */}
+        <div style={{ background: '#fff', borderRadius: 16, padding: '32px 28px', boxShadow: '0 8px 40px rgba(26,79,160,0.12)', border: '1px solid rgba(26,79,160,0.08)' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0d2b5e', marginBottom: 6 }}>Sign in</h2>
+          <p style={{ color: '#6b7280', fontSize: 13, marginBottom: 24 }}>Welcome back! Please enter your details.</p>
 
           <form onSubmit={handleSubmit}>
-            {/* Email Input */}
-            <div className="mb-3">
-              <label className="form-label fw-bold small">
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#1a4fa0', marginBottom: 6 }}>
                 Email or mobile phone number
               </label>
               <input
                 type="email"
-                className="form-control"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
                 disabled={isLoading}
-                style={{
-                  borderColor: '#a6a6a6',
-                  borderRadius: '3px',
-                  padding: '8px 10px',
-                  fontSize: '13px'
-                }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1.5px solid #c9d8f0', fontSize: 14, outline: 'none', transition: 'border 0.2s', boxSizing: 'border-box' }}
+                onFocus={e => e.target.style.border = '1.5px solid #1a4fa0'}
+                onBlur={e => e.target.style.border = '1.5px solid #c9d8f0'}
               />
             </div>
 
-            {/* Password Input */}
-            <div className="mb-3">
-              <div className="d-flex justify-content-between align-items-center mb-1">
-                <label className="form-label fw-bold small mb-0">
-                  Password
-                </label>
-                <button
-                  type="button"
-                  className="btn btn-link p-0 text-decoration-none small"
-                  style={{ fontSize: '12px', color: '#007185' }}
-                >
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                <label style={{ fontSize: 13, fontWeight: 600, color: '#1a4fa0' }}>Password</label>
+                <button type="button" style={{ background: 'none', border: 'none', color: '#FF7A00', fontSize: 12, cursor: 'pointer', fontWeight: 600, padding: 0 }}>
                   Forgot password?
                 </button>
               </div>
               <input
                 type="password"
-                className="form-control"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
                 disabled={isLoading}
-                style={{
-                  borderColor: '#a6a6a6',
-                  borderRadius: '3px',
-                  padding: '8px 10px',
-                  fontSize: '13px'
-                }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: '1.5px solid #c9d8f0', fontSize: 14, outline: 'none', transition: 'border 0.2s', boxSizing: 'border-box' }}
+                onFocus={e => e.target.style.border = '1.5px solid #1a4fa0'}
+                onBlur={e => e.target.style.border = '1.5px solid #c9d8f0'}
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
-              className="btn w-100 mb-3"
               disabled={isLoading}
-              style={{
-                backgroundColor: '#FFD814',
-                borderColor: '#FCD200',
-                color: '#0F1111',
-                padding: '8px',
-                fontSize: '13px',
-                fontWeight: '400',
-                borderRadius: '8px',
-                boxShadow: '0 2px 5px 0 rgba(213,217,217,.5)'
-              }}
+              style={{ width: '100%', padding: '11px', borderRadius: 8, border: 'none', background: 'linear-gradient(135deg, #FF7A00, #e06500)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: isLoading ? 'not-allowed' : 'pointer', opacity: isLoading ? 0.7 : 1, boxShadow: '0 4px 14px rgba(255,122,0,0.35)', transition: 'transform 0.1s' }}
+              onMouseDown={e => { if (!isLoading) e.currentTarget.style.transform = 'scale(0.98)'; }}
+              onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
             >
-              {isLoading ? "Signing in..." : "Continue"}
+              {isLoading ? "Signing in..." : "Continue →"}
             </button>
-
-            {/* Terms Text */}
-            {/* <p className="text-muted small mb-0" style={{ fontSize: '11px', lineHeight: '1.4' }}>
-              By continuing, you agree to BuyByBest's{" "}
-              <a href="#" className="text-decoration-none" style={{ color: '#007185' }}>
-                Conditions of Use
-              </a>{" "}
-              and{" "}
-              <a href="#" className="text-decoration-none" style={{ color: '#007185' }}>
-                Privacy Notice
-              </a>
-              .
-            </p> */}
           </form>
         </div>
 
-        {/* New to BuyByBest */}
-        <div className="position-relative text-center my-4">
-          <div 
-            className="position-absolute w-100 top-50 start-0" 
-            style={{ 
-              height: '1px', 
-              background: 'linear-gradient(to right, white, #e7e7e7, white)',
-              zIndex: 0
-            }}
-          />
-          <span 
-            className="position-relative bg-white px-2 text-muted small"
-            style={{ fontSize: '12px', zIndex: 1 }}
-          >
-            New to BuyByBest?
-          </span>
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '20px 0' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(26,79,160,0.15)' }} />
+          <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>New to The Indian Commerce?</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(26,79,160,0.15)' }} />
         </div>
 
-        {/* Create Account Button */}
+        {/* Create Account */}
         <button
           onClick={() => onNavigate("register")}
-          className="btn w-100"
-          style={{
-            backgroundColor: '#f0f2f2',
-            borderColor: '#adb1b8 #a2a6ac #8d9096',
-            color: '#0F1111',
-            padding: '8px',
-            fontSize: '13px',
-            fontWeight: '400',
-            borderRadius: '8px',
-            boxShadow: '0 2px 5px 0 rgba(213,217,217,.5)'
-          }}
+          style={{ width: '100%', padding: '11px', borderRadius: 8, border: '2px solid #1a4fa0', background: 'transparent', color: '#1a4fa0', fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', letterSpacing: '0.01em' }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#1a4fa0'; e.currentTarget.style.color = '#fff'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#1a4fa0'; }}
         >
-          Create your BuyByBest account
+          Create your account
         </button>
 
-        {/* Footer Links */}
-        <div className="text-center mt-4">
-          {/* <div className="d-flex justify-content-center gap-3 mb-2">
-            <a href="#" className="text-decoration-none small" style={{ color: '#007185', fontSize: '11px' }}>
-              Conditions of Use
-            </a>
-            <a href="#" className="text-decoration-none small" style={{ color: '#007185', fontSize: '11px' }}>
-              Privacy Notice
-            </a>
-            <a href="#" className="text-decoration-none small" style={{ color: '#007185', fontSize: '11px' }}>
-              Help
-            </a>
-          </div> */}
-          <p className="text-muted small mb-0" style={{ fontSize: '11px' }}>
-            © 2026, BuyByBest.in, Inc. or its affiliates
-          </p>
-        </div>
+        <p style={{ textAlign: 'center', fontSize: 11, color: '#9ca3af', marginTop: 24 }}>
+          © 2026, The Indian Commerce, Inc. or its affiliates
+        </p>
       </div>
-
-      <style>{`
-        .form-control:focus {
-          border-color: #e77600 !important;
-          box-shadow: 0 0 0 3px rgba(228, 121, 17, 0.5), 0 1px 2px rgba(15, 17, 17, 0.15) inset !important;
-        }
-      `}</style>
     </div>
   );
 };
