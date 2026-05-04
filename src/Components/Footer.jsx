@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingCart, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import Logo from '../assets/Logo.png';
 
 const Footer = () => {
   return (
@@ -20,11 +21,12 @@ const Footer = () => {
             {/* About Section */}
             <div className="col-12 col-lg-6">
               <div className="d-flex align-items-center gap-2 mb-3">
-                <ShoppingCart size={28} className="text-warning" />
-                <span className="fw-bold fs-4">BuyByBest</span>
+                             <button className="tic-logo-btn" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                               <img src={Logo} alt="The Indian Commerce" />
+                             </button>
               </div>
               <p className="text-white-50 mb-0" style={{ fontSize: '14px', lineHeight: '1.6' }}>
-                The Buy by Best – Social Community Platform is a modern ecommerce system that combines online buying and selling with social community interaction to improve trust, transparency, and user engagement.
+                The Indian Commerce – Social Community Platform is a modern ecommerce system that combines online buying and selling with social community interaction to improve trust, transparency, and user engagement.
               </p>
             </div>
 
@@ -85,8 +87,7 @@ const Footer = () => {
                 <div>
                   <p className="mb-1 fw-semibold" style={{ fontSize: '14px' }}>Phone</p>
                   <p className="mb-0 text-white-50" style={{ fontSize: '13px' }}>
-                    1800-123-4567<br />
-                    <span style={{ fontSize: '11px' }}>(Toll Free)</span>
+                    73970 78885<br />
                   </p>
                 </div>
               </div>
@@ -100,7 +101,7 @@ const Footer = () => {
                 <div>
                   <p className="mb-1 fw-semibold" style={{ fontSize: '14px' }}>Email</p>
                   <p className="mb-0 text-white-50" style={{ fontSize: '13px', wordBreak: 'break-all' }}>
-                    support@buybybest.in
+                    support@indiancommerce.in
                   </p>
                 </div>
               </div>
@@ -114,8 +115,8 @@ const Footer = () => {
                 <div>
                   <p className="mb-1 fw-semibold" style={{ fontSize: '14px' }}>Address</p>
                   <p className="mb-0 text-white-50" style={{ fontSize: '13px', lineHeight: '1.5' }}>
-                    123 Shopping Street,<br />
-                    Mumbai, India
+                    #2F, 2nd Floor , New Siddhapudur , Coimbatore<br />
+                    Tamil Nadu 
                   </p>
                 </div>
               </div>
@@ -142,7 +143,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center pt-3 border-top border-secondary">
             <p className="text-white-50 mb-0" style={{ fontSize: '12px' }}>
-              © 2024, BuyByBest.in, Inc. or its affiliates. All rights reserved.
+              © 2026, The Indian Commerce , In. or its affiliates. All rights reserved.
             </p>
           </div>
         </div>
