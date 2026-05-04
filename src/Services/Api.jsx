@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://buybybest-backend-0khu.onrender.com';
 
 const api = {
   // Product APIs

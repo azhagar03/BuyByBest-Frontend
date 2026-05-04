@@ -55,7 +55,7 @@ const FilterSidebar = ({ onFilterChange, products }) => {
   };
 
   return (
-    <div className="card shadow-sm sticky-top" style={{ top: '6rem' }}>
+    <div className="card shadow-sm sticky-top" style={{ top: '6rem'}}>
       <div className="card-body">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h5 className="card-title mb-0 d-flex align-items-center gap-2">
@@ -92,7 +92,7 @@ const FilterSidebar = ({ onFilterChange, products }) => {
 
         {/* Categories */}
         {categories.length > 0 && (
-          <div className="mb-4 pb-4 border-bottom">
+          <div className="mb-4 pb-5 mb-5 border-bottom">
             <h6 className="fw-semibold mb-3">Category</h6>
             <div className="overflow-auto" style={{ maxHeight: '12rem' }}>
               {categories.map(cat => (
@@ -116,7 +116,7 @@ const FilterSidebar = ({ onFilterChange, products }) => {
 
         {/* Brands */}
         {brands.length > 0 && (
-          <div className="mb-4 pb-4 border-bottom">
+          <div className="mb-4 pb-5 border-bottom">
             <h6 className="fw-semibold mb-3">Brand</h6>
             <div className="overflow-auto" style={{ maxHeight: '12rem' }}>
               {brands.map(brand => (
@@ -137,8 +137,6 @@ const FilterSidebar = ({ onFilterChange, products }) => {
             </div>
           </div>
         )}
-
-        {/* Rating */}
         
       </div>
     </div>

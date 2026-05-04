@@ -27,7 +27,7 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
 
   const loadCategoriesAndProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/products');
+      const response = await fetch('https://buybybest-backend-0khu.onrender.com/products');
       const products = await response.json();
       
       setAllProducts(products);

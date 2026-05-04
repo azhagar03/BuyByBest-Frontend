@@ -63,7 +63,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
       ...paymentData,
     };
 
-    const res  = await fetch("http://localhost:5000/api/orders", {
+    const res  = await fetch("https://buybybest-backend-0khu.onrender.com/orders", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(payload),
@@ -91,7 +91,7 @@ const CheckoutPage = ({ cart, user, onNavigate, onClearCart }) => {
   const handleRazorpayPayment = async () => {
     setPlacing(true);
     try {
-      const res  = await fetch("http://localhost:5000/api/orders/create-razorpay-order", {
+      const res  = await fetch("https://buybybest-backend-0khu.onrender.com/orders/create-razorpay-order", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ amount: total }),
