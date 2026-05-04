@@ -16,7 +16,7 @@ import CartPage from './Components/CartPage';
 import AccountPage from './Components/AccountPage';
 import AdminBookings from './Admin/AdminBookings';
 
-const API = 'https://buybybest-backend-0khu.onrender.com';
+const API = 'https://buybybest-backend-0khu.onrender.com/api';
 
 // ─── Flatten populated cart from server into a simple flat array ───
 // Server returns: { items: [{ productId: { _id, name, price, ... }, quantity: N }] }

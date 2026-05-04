@@ -30,7 +30,7 @@ const OrdersPage = ({ user, onNavigate }) => {
   const fetchOrders = async () => {
     try {
       const userId = user._id || user.id;
-      const res = await fetch(`https://buybybest-backend-0khu.onrender.com/orders/user/${userId}`);
+      const res = await fetch(`https://buybybest-backend-0khu.onrender.com/api/orders/user/${userId}`);
       const data = await res.json();
       setOrders(data);
     } catch (err) {

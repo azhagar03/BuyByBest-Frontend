@@ -27,7 +27,7 @@ const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
   const fetchNotifications = async () => {
     try {
       const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-      const res   = await fetch(`https://buybybest-backend-0khu.onrender.com/orders/admin/notifications?since=${since}`);
+      const res   = await fetch(`https://buybybest-backend-0khu.onrender.com/api/orders/admin/notifications?since=${since}`);
       if (!res.ok) return;
       const data  = await res.json();
       if (Array.isArray(data)) {

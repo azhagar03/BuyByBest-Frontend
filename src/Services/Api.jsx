@@ -1,4 +1,4 @@
-const API_BASE = 'https://buybybest-backend-0khu.onrender.com';
+const API_BASE = 'https://buybybest-backend-0khu.onrender.com/api';
 
 const api = {
   // Product APIs
