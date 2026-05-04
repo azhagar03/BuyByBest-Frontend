@@ -20,7 +20,7 @@ const Home = ({ filters, onSelectProduct, onNavigate, onAddToCart, onViewDetails
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://buybybest-backend-0khu.onrender.com/api/products");
+      const res = await fetch("https://buybybest-back-end.onrender.com/api/products");
       const data = await res.json();
       setProducts(data);
     } catch (err) {

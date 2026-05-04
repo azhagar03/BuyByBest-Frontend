@@ -33,7 +33,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
   // Fetch the freshest product data including stock
   const loadLiveProduct = async () => {
     try {
-      const res = await fetch(`https://buybybest-backend-0khu.onrender.com/api/products/${product._id}`);
+      const res = await fetch(`https://buybybest-back-end.onrender.com/api/products/${product._id}`);
       if (res.ok) {
         const data = await res.json();
         setLiveProduct(data);
@@ -47,7 +47,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
 
   const loadRelatedProducts = async () => {
     try {
-      const res = await fetch("https://buybybest-backend-0khu.onrender.com/api/products");
+      const res = await fetch("https://buybybest-back-end.onrender.com/api/products");
       const data = await res.json();
       const related = data
         .filter((p) => p.category === product.category && p._id !== product._id)
@@ -60,7 +60,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
 
   const loadReviews = async () => {
     try {
-      const res = await fetch(`https://buybybest-backend-0khu.onrender.com/api/reviews/${product._id}`);
+      const res = await fetch(`https://buybybest-back-end.onrender.com/api/reviews/${product._id}`);
       const data = await res.json();
       setReviews(data.reviews || []);
       setAvgRating(data.avgRating || 0);
@@ -98,7 +98,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
       return;
     }
     try {
-      const res = await fetch("https://buybybest-backend-0khu.onrender.com/api/reviews", {
+      const res = await fetch("https://buybybest-back-end.onrender.com/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

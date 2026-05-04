@@ -50,7 +50,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
     setLoading(true);
     try {
       const uid = user._id || user.id;
-      const res  = await fetch(`https://buybybest-backend-0khu.onrender.com/api/orders/user/${uid}`);
+      const res  = await fetch(`https://buybybest-back-end.onrender.com/api/orders/user/${uid}`);
       const data = await res.json();
       setOrders(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -63,7 +63,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
   const handleCancel = async (orderId) => {
     setCancelling(orderId);
     try {
-      const res  = await fetch(`https://buybybest-backend-0khu.onrender.com/api/orders/${orderId}/cancel`, { method: "PUT" });
+      const res  = await fetch(`https://buybybest-back-end.onrender.com/api/orders/${orderId}/cancel`, { method: "PUT" });
       const data = await res.json();
       if (data.success) {
         setOrders((prev) => prev.map((o) => o._id === orderId ? data.order : o));

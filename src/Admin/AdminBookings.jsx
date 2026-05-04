@@ -35,7 +35,7 @@ const AdminBookings = () => {
     setLoading(true);
     setError(null);
     try {
-      const res  = await fetch("https://buybybest-backend-0khu.onrender.com/api/orders/admin/all");
+      const res  = await fetch("https://buybybest-back-end.onrender.com/api/orders/admin/all");
       if (!res.ok) throw new Error(`Server returned ${res.status}`);
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -53,7 +53,7 @@ const AdminBookings = () => {
 
   const updateStatus = async (orderId, field, value) => {
     try {
-      const res  = await fetch(`https://buybybest-backend-0khu.onrender.com/api/orders/${orderId}/status`, {
+      const res  = await fetch(`https://buybybest-back-end.onrender.com/api/orders/${orderId}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ [field]: value }),
