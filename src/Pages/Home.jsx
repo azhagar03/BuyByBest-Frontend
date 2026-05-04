@@ -268,7 +268,7 @@ const Home = ({ filters, onSelectProduct, onNavigate, onAddToCart, onViewDetails
                               </button>
 
                               <button
-                                className="btn btn-primary btn-sm flex-fill"
+                                className="btn btn-danger btn-sm flex-fill"
                                 style={{ fontSize: "0.72rem", position: "relative", zIndex: 2 }}
                                 disabled={isOutOfStock}
                                 onClick={(e) => {

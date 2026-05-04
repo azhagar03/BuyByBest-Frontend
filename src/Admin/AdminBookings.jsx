@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const STATUS_COLORS = {
-  placed:     { bg: "#0dcaf0", color: "#fff" },
+  placed:     { bg: "#35a84e", color: "#fff" },
   confirmed:  { bg: "#0d6efd", color: "#fff" },
-  processing: { bg: "#ffc107", color: "#000" },
+  processing: { bg: "#ff2407", color: "#000" },
   shipped:    { bg: "#17a2b8", color: "#fff" },
   delivered:  { bg: "#198754", color: "#fff" },
   cancelled:  { bg: "#dc3545", color: "#fff" },
 };
 const PAYMENT_COLORS = {
-  pending:  { bg: "#ffc107", color: "#000" },
+  pending:  { bg: "#f0522b", color: "#000" },
   paid:     { bg: "#198754", color: "#fff" },
   failed:   { bg: "#dc3545", color: "#fff" },
   refunded: { bg: "#6c757d", color: "#fff" },
@@ -190,7 +190,7 @@ const AdminBookings = () => {
 
                   <div className="col-6 col-md-2">
                     <p className="text-muted mb-0" style={{ fontSize: "0.68rem" }}>ORDER #</p>
-                    <span className="fw-bold" style={{ color: "#ffc107", fontSize: "0.82rem" }}>
+                    <span className="fw-bold" style={{ color: "#2ab660", fontSize: "0.82rem" }}>
                       {order.orderNumber}
                     </span>
                     <p className="text-muted mb-0" style={{ fontSize: "0.65rem" }}>

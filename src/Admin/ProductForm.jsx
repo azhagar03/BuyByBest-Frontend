@@ -76,14 +76,14 @@ const ProductForm = ({ product, onClose, onSuccess }) => {
   return (
     <div
       className="modal d-block"
-      style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1050 }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.55)", zIndex: 1050 }}
     >
       <div className="modal-dialog modal-lg">
         <div className="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
           {/* Header */}
           <div
             className="modal-header border-0 px-4 pt-4 pb-2"
-            style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)" }}
+            style={{ background: "linear-gradient(135deg, #38bd59 0%, #27b853 100%)" }}
           >
             <div>
               <h5 className="modal-title text-white fw-bold mb-1">
@@ -318,12 +318,8 @@ const ProductForm = ({ product, onClose, onSuccess }) => {
                 </button>
                 <button
                   type="submit"
-                  className="btn px-4 rounded-pill fw-bold text-dark"
-                  style={{
-                    background: "linear-gradient(135deg, #ffc107, #ff9800)",
-                    border: "none",
-                    minWidth: "120px",
-                  }}
+                  className="btn btn-success px-4 rounded-pill fw-bold text-white"
+            
                   disabled={loading}
                 >
                   {loading ? (

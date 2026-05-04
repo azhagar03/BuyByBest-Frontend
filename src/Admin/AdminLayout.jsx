@@ -65,7 +65,7 @@ const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
       {/* ── Sidebar ── */}
       <div
         className="text-white d-flex flex-column position-fixed top-0 start-0"
-        style={{ width: 240, height: "100vh", background: "#b5b5f0", zIndex: 1000 }}
+        style={{ width: 240, height: "100vh", background: "#198754", zIndex: 1000 }}
       >
         {/* Logo */}
         <div className="p-4 border-bottom border-secondary">
@@ -94,7 +94,7 @@ const AdminLayout = ({ children, onLogout, activePage, onNavigate }) => {
                 borderRadius: 8,
                 fontSize: "0.88rem",
                 border: "none",
-                background: activePage === item.key ? "#FF7A00" : "transparent",
+                background: activePage === item.key ? "#eb1b1b" : "transparent",
                 color:      activePage === item.key ? "#000"    : "white",
                 fontWeight: activePage === item.key ? "700"     : "400",
               }}

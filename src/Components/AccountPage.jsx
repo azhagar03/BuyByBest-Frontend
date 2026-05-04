@@ -126,7 +126,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
     <div style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif' }}>
       <style>{`
         .tic-tab-btn { background: #e2e8f0; color: #475569; border: none; border-radius: 20px; padding: 7px 18px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .tic-tab-btn.active { background: #1a4fa0; color: #fff; }
+        .tic-tab-btn.active { background: #4ff56a; color: #fff; }
         .tic-tab-btn:hover:not(.active) { background: #cbd5e1; }
         .tic-order-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: box-shadow 0.2s; }
         .tic-order-card:hover { box-shadow: 0 4px 20px rgba(26,79,160,0.1); }
@@ -135,8 +135,8 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 16px' }}>
 
         {/* Profile Header */}
-        <div style={{ background: 'linear-gradient(135deg, #0d2b5e 0%, #1a4fa0 100%)', borderRadius: 16, padding: '28px 32px', marginBottom: 24, boxShadow: '0 8px 32px rgba(13,43,94,0.25)', display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-          <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'linear-gradient(135deg,#FF7A00,#e06500)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', fontWeight: 800, color: '#fff', flexShrink: 0, boxShadow: '0 4px 16px rgba(255,122,0,0.4)' }}>
+        <div style={{ background: 'linear-gradient(135deg, #57f18a 0%, #037a1d 100%)', borderRadius: 16, padding: '28px 32px', marginBottom: 24, boxShadow: '0 8px 32px rgba(13,43,94,0.25)', display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+          <div style={{ width: 72, height: 72, borderRadius: '50%', background: '#eb1b1b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', fontWeight: 800, color: '#fff', flexShrink: 0, boxShadow: '0 4px 16px rgba(255,122,0,0.4)' }}>
             {(user.username || user.name || "U")[0].toUpperCase()}
           </div>
           <div style={{ flex: 1 }}>
@@ -145,7 +145,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
             {user.phone && <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 0, fontSize: 13 }}>📞 {user.phone}</p>}
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <button onClick={() => onNavigate("home")} style={{ background: 'linear-gradient(135deg,#FF7A00,#e06500)', color: '#fff', border: 'none', borderRadius: 8, padding: '9px 20px', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+            <button onClick={() => onNavigate("home")} style={{ background: '#eb1b1b', color: '#fff', border: 'none', borderRadius: 8, padding: '9px 20px', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
               🛍️ Shop More
             </button>
             <button onClick={onLogout} style={{ background: 'rgba(255,255,255,0.12)', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', borderRadius: 8, padding: '9px 20px', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
@@ -216,7 +216,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                           <div style={{ minWidth: 140 }}>
                             <div style={{ fontSize: 10, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Order</div>
-                            <div style={{ fontWeight: 700, color: '#FF7A00', fontSize: 14 }}>#{order.orderNumber}</div>
+                            <div style={{ fontWeight: 700, color: '#f03017', fontSize: 14 }}>#{order.orderNumber}</div>
                             <div style={{ fontSize: 11, color: '#9ca3af' }}>
                               {new Date(order.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
                             </div>
@@ -236,7 +236,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
                             {cancellable && (
                               <button
                                 onClick={e => { e.stopPropagation(); setCancelConfirm(order._id); }}
-                                style={{ background: '#fee2e2', color: '#dc2626', border: '1px solid #fca5a5', borderRadius: 6, padding: '5px 12px', fontSize: 12, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+                                style={{ background: '#fee2e2', color: '#f70e0e', border: '1px solid #fca5a5', borderRadius: 6, padding: '5px 12px', fontSize: 12, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
                               >
                                 <X size={12} /> Cancel
                               </button>
@@ -334,7 +334,7 @@ const AccountPage = ({ user, onNavigate, onLogout }) => {
                                       <p style={{ fontWeight: 600, fontSize: 13, marginBottom: 2 }}>{item.name}</p>
                                       <p style={{ fontSize: 11, color: '#6b7280', margin: 0 }}>Qty: {item.quantity} × ₹{n(item.price).toFixed(2)}</p>
                                     </div>
-                                    <span style={{ fontWeight: 700, fontSize: 13, color: '#FF7A00' }}>₹{(n(item.price)*n(item.quantity)).toFixed(2)}</span>
+                                    <span style={{ fontWeight: 700, fontSize: 13, color: '#f02f16' }}>₹{(n(item.price)*n(item.quantity)).toFixed(2)}</span>
                                   </div>
                                 ))}
                               </div>

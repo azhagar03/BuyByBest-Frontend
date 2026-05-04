@@ -81,7 +81,7 @@ const Footer = () => {
             
             <div className="col-12 col-md-4">
               <div className="d-flex align-items-start gap-3">
-                <div className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
+                <div className="bg-danger text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
                   <Phone size={20} />
                 </div>
                 <div>
@@ -95,7 +95,7 @@ const Footer = () => {
 
             <div className="col-12 col-md-4">
               <div className="d-flex align-items-start gap-3">
-                <div className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
+                <div className="bg-danger text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
                   <Mail size={20} />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ const Footer = () => {
 
             <div className="col-12 col-md-4">
               <div className="d-flex align-items-start gap-3">
-                <div className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
+                <div className="bg-danger text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '40px', height: '40px' }}>
                   <MapPin size={20} />
                 </div>
                 <div>

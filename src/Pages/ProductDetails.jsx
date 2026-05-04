@@ -442,7 +442,7 @@ const ProductDetailsPage = ({ product, onNavigate, onAddToCart }) => {
                     Add to Cart
                   </button>
                   <button
-                    className="btn btn-lg btn-primary fw-bold"
+                    className="btn btn-lg btn-danger fw-bold"
                
                     onClick={handleBuyNow}
                     disabled={isOutOfStock}

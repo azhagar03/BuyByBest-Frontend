@@ -82,10 +82,10 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
     <>
       <style>{`
         :root {
-          --tic-blue: #1a4fa0;
-          --tic-orange: #FF7A00;
+          --tic-blue: #16792e;
+          --tic-orange: #eb1b1b;
           --tic-green: #2d8c3c;
-          --tic-dark: #0d2b5e;
+          --tic-dark: #32f884;
           --tic-light-blue: #e8f0fb;
         }
 
@@ -103,7 +103,7 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
         }
         .tic-logo-btn:hover { transform: scale(1.04); }
         .tic-logo-btn img {
-          height: 80px;
+          height: 85px;
           width: auto;
           object-fit: contain;
           filter: drop-shadow(0 2px 6px rgba(255,122,0,0.3));
