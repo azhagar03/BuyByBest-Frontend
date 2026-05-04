@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, User, LogOut, ShoppingCart, Menu } from 'lucide-react';
+import Logo from '../assets/Logo.png';
 
 const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) => {
   const [categories, setCategories] = useState([]);
@@ -27,7 +28,7 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
 
   const loadCategoriesAndProducts = async () => {
     try {
-      const response = await fetch('https://buybybest-backend-0khu.onrender.com/products');
+      const response = await fetch('https://buybybest-back-end.onrender.com/api/products');
       const products = await response.json();
       
       setAllProducts(products);
@@ -99,9 +100,7 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
               onClick={() => onNavigate('home')}
               className="btn btn-link text-white text-decoration-none d-flex align-items-center gap-2 fs-5 fs-md-4 fw-bold p-0 hover-warning"
             >
-              <ShoppingCart size={24} className="d-md-none" />
-              <ShoppingCart size={28} className="d-none d-md-block" />
-              <span className="text-nowrap">BuyByBest</span>
+            <img src={Logo} alt="" width="100" height="60"/>
             </button>
           </div>
 
