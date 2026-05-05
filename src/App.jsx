@@ -15,6 +15,8 @@ import CheckoutPage from './Components/CheckoutPage';
 import CartPage from './Components/CartPage';
 import AccountPage from './Components/AccountPage';
 import AdminBookings from './Admin/AdminBookings';
+import SecondhandPage from './Components/SecondhandPage';
+import AgriFeedPage from './Components/AgrifeedPage';
 
 const API = 'https://buybybest-back-end.onrender.com/api';
 
@@ -309,6 +311,12 @@ const [adminPage, setAdminPage] = useState("dashboard");
     onNavigate={handleNavigate}
     onLogout={handleLogout}
   />
+)}
+{currentPage === 'secondhand' && (
+  <SecondhandPage onNavigate={handleNavigate} />
+)}
+{currentPage === 'agrifeed' && (
+  <AgriFeedPage onNavigate={handleNavigate} onAddToCart={handleAddToCart} />
 )}
           {currentPage === 'admin' && !isAdminLogged && (
             <AdminLogin onAdminLogin={handleAdminLogin} />

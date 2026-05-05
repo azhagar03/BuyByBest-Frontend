@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, User, LogOut, ShoppingCart, Menu } from 'lucide-react';
+import { Search, User, LogOut, ShoppingCart, Menu, X } from 'lucide-react';
 import Logo from '../assets/Logo.png';
 
 const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) => {
@@ -12,15 +12,11 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const searchRef = useRef(null);
 
-  useEffect(() => {
-    loadCategoriesAndProducts();
-  }, []);
+  useEffect(() => { loadCategoriesAndProducts(); }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setShowSuggestions(false);
-      }
+      if (searchRef.current && !searchRef.current.contains(e.target)) setShowSuggestions(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -33,22 +29,18 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
       setAllProducts(products);
       const unique = [...new Set(products.map(p => p.category).filter(Boolean))];
       setCategories(unique);
-    } catch (error) {
-      console.error('Error loading data:', error);
-    }
+    } catch (error) { console.error('Error loading data:', error); }
   };
 
   const handleQueryChange = (e) => {
     const value = e.target.value;
     setQuery(value);
     if (value.trim().length > 0) {
-      const filtered = allProducts
-        .filter(p => {
-          const matchesCategory = category === 'all' || p.category === category;
-          const matchesQuery = p.name.toLowerCase().includes(value.toLowerCase());
-          return matchesCategory && matchesQuery;
-        })
-        .slice(0, 8);
+      const filtered = allProducts.filter(p => {
+        const matchesCategory = category === 'all' || p.category === category;
+        const matchesQuery = p.name.toLowerCase().includes(value.toLowerCase());
+        return matchesCategory && matchesQuery;
+      }).slice(0, 8);
       setSuggestions(filtered);
       setShowSuggestions(true);
     } else {
@@ -62,9 +54,7 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
     onSearch({ category: category === 'all' ? '' : category, query: query.trim() });
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSearchClick();
-  };
+  const handleKeyPress = (e) => { if (e.key === 'Enter') handleSearchClick(); };
 
   const handleSuggestionClick = (product) => {
     setQuery(product.name);
@@ -81,88 +71,214 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
   return (
     <>
       <style>{`
-        :root {
-          --tic-blue: #16792e;
-          --tic-orange: #eb1b1b;
-          --tic-green: #2d8c3c;
-          --tic-dark: #32f884;
-          --tic-light-blue: #e8f0fb;
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+        .tic-nav-root {
+          font-family: 'Outfit', sans-serif;
+          background: #ffffff;
+          border-bottom: 1.5px solid #f0f0f0;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          position: sticky;
+          top: 0;
+          z-index: 1000;
         }
 
-        .tic-navbar {
-          background: linear-gradient(135deg, var(--tic-dark) 0%, var(--tic-blue) 100%);
-          box-shadow: 0 4px 20px rgba(13, 43, 94, 0.4);
-        }
-
-        .tic-logo-btn {
+        /* ── Logo area ── */
+        .tic-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          cursor: pointer;
           background: none;
           border: none;
-          padding: 4px 8px;
-          cursor: pointer;
-          transition: transform 0.2s ease;
+          padding: 0;
         }
-        .tic-logo-btn:hover { transform: scale(1.04); }
-        .tic-logo-btn img {
-          height: 85px;
-          width: auto;
-          object-fit: contain;
-          filter: drop-shadow(0 2px 6px rgba(255,122,0,0.3));
+        .tic-logo-wrap img { height: 46px; width: auto; object-fit: contain; }
+        .tic-brand-text { display: flex; flex-direction: column; line-height: 1; }
+        .tic-brand-main {
+          font-size: 1.35rem;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+        }
+        .tic-brand-main .the { color: #1a1a1a; }
+        .tic-brand-main .indian { color: #FF6B00; }
+        .tic-brand-main .commerce { color: #1a7a2e; }
+        .tic-brand-sub {
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 1.5px;
+          color: #888;
+          text-transform: uppercase;
+          margin-top: 1px;
         }
 
-        .tic-search-group .form-select {
-          background-color: #fff;
-          border: none;
-          border-radius: 8px 0 0 8px;
-          font-size: 13px;
-          color: #0d2b5e;
-          font-weight: 600;
-          max-width: 110px;
+        /* ── Feed Pills ── */
+        .tic-feed-pills {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-shrink: 0;
         }
-        .tic-search-group .form-control {
-          border: none;
-          font-size: 14px;
+        .tic-feed-pill {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          border: 2.5px solid transparent;
+          background: none;
+          cursor: pointer;
+          transition: all 0.22s ease;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+          gap: 2px;
+          position: relative;
+          overflow: hidden;
+        }
+        .tic-feed-pill .pill-emoji { font-size: 1.5rem; line-height: 1; }
+        .tic-feed-pill.secondhand {
+          background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+          border-color: #FF6B00;
+          color: #e65100;
+        }
+        .tic-feed-pill.secondhand:hover {
+          background: #FF6B00;
+          color: #fff;
+          transform: scale(1.1);
+          box-shadow: 0 4px 14px rgba(255,107,0,0.35);
+        }
+        .tic-feed-pill.agri {
+          background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+          border-color: #1a7a2e;
+          color: #1a7a2e;
+        }
+        .tic-feed-pill.agri:hover {
+          background: #1a7a2e;
+          color: #fff;
+          transform: scale(1.1);
+          box-shadow: 0 4px 14px rgba(26,122,46,0.35);
+        }
+
+        /* ── Search ── */
+        .tic-search-wrap {
+          display: flex;
+          align-items: center;
+          background: #f5f5f5;
+          border-radius: 50px;
+          overflow: hidden;
+          border: 1.5px solid #e8e8e8;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          width: 100%;
+        }
+        .tic-search-wrap:focus-within {
+          border-color: #FF6B00;
+          box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
           background: #fff;
         }
-        .tic-search-group .form-control:focus {
-          box-shadow: none;
+        .tic-search-select {
+          border: none;
+          background: transparent;
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+          padding: 0 12px 0 16px;
           outline: none;
+          cursor: pointer;
+          font-family: 'Outfit', sans-serif;
+          flex-shrink: 0;
+          border-right: 1.5px solid #e0e0e0;
+          height: 44px;
+          max-width: 110px;
         }
-        .tic-search-btn {
-          background: var(--tic-orange) !important;
-          border: none !important;
-          border-radius: 0 8px 8px 0 !important;
-          color: #fff !important;
-          padding: 0 18px !important;
+        .tic-search-input {
+          flex: 1;
+          border: none;
+          background: transparent;
+          font-size: 15px;
+          color: #1a1a1a;
+          padding: 0 14px;
+          outline: none;
+          font-family: 'Outfit', sans-serif;
+          height: 44px;
+        }
+        .tic-search-input::placeholder { color: #aaa; }
+        .tic-search-btn-inner {
+          background: #FF6B00;
+          border: none;
+          width: 46px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
           transition: background 0.2s;
+          flex-shrink: 0;
+          border-radius: 0 50px 50px 0;
         }
-        .tic-search-btn:hover { background: #e06500 !important; }
+        .tic-search-btn-inner:hover { background: #e55d00; }
 
-        .tic-nav-icon-btn {
+        /* ── Suggestions ── */
+        .tic-suggestions {
+          position: absolute;
+          top: calc(100% + 6px);
+          left: 0;
+          right: 0;
+          background: #fff;
+          border-radius: 14px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+          z-index: 1100;
+          max-height: 300px;
+          overflow-y: auto;
+          border: 1px solid #f0f0f0;
+        }
+        .tic-sug-item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 14px;
+          border: none;
+          background: transparent;
+          text-align: left;
+          cursor: pointer;
+          transition: background 0.15s;
+          border-bottom: 1px solid #f5f5f5;
+          font-family: 'Outfit', sans-serif;
+        }
+        .tic-sug-item:hover { background: #fff8f3; }
+        .tic-sug-item:last-child { border-bottom: none; }
+
+        /* ── Icon buttons ── */
+        .tic-icon-btn {
           background: none;
           border: none;
-          color: #fff;
           cursor: pointer;
           display: flex;
           align-items: center;
-          gap: 6px;
-          font-size: 13px;
-          padding: 6px 8px;
-          border-radius: 6px;
-          transition: background 0.2s, color 0.2s;
+          gap: 8px;
+          padding: 8px 12px;
+          border-radius: 10px;
+          transition: background 0.18s;
+          color: #1a1a1a;
+          font-family: 'Outfit', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          position: relative;
           text-decoration: none;
         }
-        .tic-nav-icon-btn:hover {
-          background: rgba(255,122,0,0.2);
-          color: var(--tic-orange);
-        }
-        .tic-nav-icon-btn .label-sm { font-size: 11px; color: rgba(255,255,255,0.6); }
-        .tic-nav-icon-btn .label-main { font-weight: 600; color: #fff; font-size: 13px; }
-
+        .tic-icon-btn:hover { background: #f5f5f5; }
+        .tic-icon-btn .sub-label { font-size: 12px; color: #888; font-weight: 400; }
+        .tic-icon-btn .main-label { font-size: 14px; font-weight: 700; color: #1a1a1a; }
         .tic-cart-badge {
           position: absolute;
-          top: -6px;
-          right: -8px;
-          background: var(--tic-orange);
+          top: 2px;
+          right: 6px;
+          background: #FF6B00;
           color: #fff;
           border-radius: 50%;
           font-size: 10px;
@@ -171,259 +287,216 @@ const Navbar = ({ currentUser, onLogout, onNavigate, onSearch, cartCount = 0 }) 
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
+          font-weight: 800;
         }
 
-        .tic-category-bar {
-          background: var(--tic-blue);
-          border-top: 1px solid rgba(255,255,255,0.12);
+        /* ── Category bar ── */
+        .tic-cat-bar {
+          background: #fafafa;
+          border-top: 1px solid #f0f0f0;
+          padding: 8px 0;
         }
-
-        .tic-cat-btn {
-          background: rgba(255,255,255,0.1);
-          color: #fff;
-          border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 20px;
-          padding: 5px 16px;
-          font-size: 0.82rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          white-space: nowrap;
-        }
-        .tic-cat-btn:hover {
-          background: rgba(255,122,0,0.25);
-          border-color: var(--tic-orange);
-          color: #ffd699;
-          transform: translateY(-2px);
-        }
-        .tic-cat-btn.active {
-          background: var(--tic-orange);
-          border-color: var(--tic-orange);
-          color: #fff;
-          font-weight: 700;
-        }
-        .tic-cat-btn.all-btn {
-          background: var(--tic-green);
-          border-color: var(--tic-green);
-          color: #fff;
-          font-weight: 700;
-        }
-        .tic-cat-btn.all-btn:hover, .tic-cat-btn.all-btn.active {
-          background: #236b30;
-          border-color: #236b30;
-        }
-
-        .tic-suggestions {
-          position: absolute;
-          top: calc(100% + 4px);
-          left: 0;
-          right: 0;
-          background: #fff;
-          border-radius: 10px;
-          box-shadow: 0 12px 40px rgba(13,43,94,0.18);
-          z-index: 1050;
-          max-height: 320px;
-          overflow-y: auto;
-        }
-        .tic-suggestion-item {
-          width: 100%;
+        .tic-cat-list {
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 10px 14px;
-          border: none;
-          background: transparent;
-          border-bottom: 1px solid #f0f0f0;
-          text-align: left;
+          gap: 8px;
+          overflow-x: auto;
+          padding: 2px 24px;
+          scrollbar-width: none;
+        }
+        .tic-cat-list::-webkit-scrollbar { display: none; }
+        .tic-cat-pill {
+          background: none;
+          border: 1.5px solid #e0e0e0;
+          border-radius: 50px;
+          padding: 6px 18px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #444;
           cursor: pointer;
-          transition: background 0.15s;
+          white-space: nowrap;
+          font-family: 'Outfit', sans-serif;
+          transition: all 0.18s;
         }
-        .tic-suggestion-item:hover { background: var(--tic-light-blue); }
-        .tic-suggestion-item:last-child { border-bottom: none; }
+        .tic-cat-pill:hover { border-color: #FF6B00; color: #FF6B00; background: #fff5ee; }
+        .tic-cat-pill.active { background: #FF6B00; border-color: #FF6B00; color: #fff; }
+        .tic-cat-pill.all-pill { border-color: #1a7a2e; color: #1a7a2e; }
+        .tic-cat-pill.all-pill:hover, .tic-cat-pill.all-pill.active { background: #1a7a2e; border-color: #1a7a2e; color: #fff; }
 
-        .tic-mobile-menu {
-          background: var(--tic-dark);
-          border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .tic-register-btn {
-          background: var(--tic-orange);
+        /* ── Register btn ── */
+        .tic-reg-btn {
+          background: #1a1a1a;
           color: #fff;
           border: none;
-          border-radius: 6px;
-          padding: 5px 14px;
+          border-radius: 8px;
+          padding: 7px 16px;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
-          transition: background 0.2s;
+          font-family: 'Outfit', sans-serif;
+          transition: background 0.18s;
         }
-        .tic-register-btn:hover { background: #e06500; }
+        .tic-reg-btn:hover { background: #FF6B00; }
+
+        /* ── Mobile menu ── */
+        .tic-mobile-drawer {
+          background: #fff;
+          border-top: 1px solid #f0f0f0;
+          padding: 16px;
+        }
 
         @media (max-width: 767px) {
-          .tic-logo-btn img { height: 44px; }
+          .tic-logo-wrap img { height: 38px; }
+          .tic-brand-main { font-size: 1.1rem; }
         }
       `}</style>
 
-      <nav className="tic-navbar sticky-top">
+      <nav className="tic-nav-root">
         {/* ── Main Row ── */}
-        <div className="container-fluid py-2 px-3 px-md-4">
-          <div className="row align-items-center g-2">
+        <div style={{ padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
 
-            {/* Logo */}
-            <div className="col-6 col-md-auto">
-              <button className="tic-logo-btn" onClick={() => onNavigate('home')}>
-                <img src={Logo} alt="The Indian Commerce" />
+          {/* Left: Logo + Feed Pills */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexShrink: 0 }}>
+            {/* Logo + Brand */}
+            <button className="tic-logo-wrap" onClick={() => onNavigate('home')} style={{ flexShrink: 0 }}>
+              <img src={Logo} alt="TIC" />
+              <div className="tic-brand-text">
+                <div className="tic-brand-main">
+                  <span className="the">the</span><span className="indian">indian</span><span className="commerce">commerce</span>
+                </div>
+                <div className="tic-brand-sub">Connect · Grow · Succeed</div>
+              </div>
+            </button>
+
+            {/* Feed Pills */}
+            <div className="tic-feed-pills" style={{ flexShrink: 0 }}>
+              <button className="tic-feed-pill secondhand" onClick={() => onNavigate('secondhand')} title="Secondhand Market">
+                <span className="pill-emoji">♻️</span>
+                <span>Second Hand</span>
+              </button>
+              <button className="tic-feed-pill agri" onClick={() => onNavigate('agrifeed')} title="Agri Feed">
+                <span className="pill-emoji">🌾</span>
+                <span>Agree Feed</span>
               </button>
             </div>
+          </div>
 
-            {/* Mobile: cart + hamburger */}
-            <div className="col-6 d-md-none text-end">
-              <div className="d-flex align-items-center justify-content-end gap-3">
-                <button className="tic-nav-icon-btn" onClick={() => onNavigate('cart')}>
-                  <div className="position-relative">
-                    <ShoppingCart size={22} />
-                    {cartCount > 0 && <span className="tic-cart-badge">{cartCount}</span>}
-                  </div>
-                </button>
-                <button className="tic-nav-icon-btn" onClick={() => setShowMobileMenu(!showMobileMenu)}>
-                  <Menu size={24} />
+          {/* Search */}
+          <div ref={searchRef} style={{ flex: 1, minWidth: 200, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ position: 'relative', width: '100%', maxWidth: '600px' }}>
+              <div className="tic-search-wrap">
+                <select className="tic-search-select" value={category} onChange={e => setCategory(e.target.value)}>
+                  <option value="all">All</option>
+                  {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
+                <input
+                  type="text"
+                  className="tic-search-input"
+                  value={query}
+                  onChange={handleQueryChange}
+                  onKeyPress={handleKeyPress}
+                  onFocus={() => query && setShowSuggestions(true)}
+                  placeholder="Search products, brands..."
+                />
+                <button className="tic-search-btn-inner" onClick={handleSearchClick}>
+                  <Search size={18} color="#fff" />
                 </button>
               </div>
-            </div>
-
-            {/* Search */}
-            <div className="col-12 col-md order-3 order-md-2" ref={searchRef}>
-              <div className="position-relative">
-                <div className="input-group tic-search-group" style={{ borderRadius: 8, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.15)' }}>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="form-select"
-                    style={{ maxWidth: 110 }}
-                  >
-                    <option value="all">All</option>
-                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                  </select>
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={handleQueryChange}
-                    onKeyPress={handleKeyPress}
-                    onFocus={() => query && setShowSuggestions(true)}
-                    placeholder="Search products..."
-                    className="form-control"
-                  />
-                  <button className="tic-search-btn" onClick={handleSearchClick}>
-                    <Search size={18} />
-                  </button>
-                </div>
-
-                {showSuggestions && suggestions.length > 0 && (
-                  <div className="tic-suggestions">
-                    {suggestions.map(product => (
-                      <button key={product._id} className="tic-suggestion-item" onClick={() => handleSuggestionClick(product)}>
-                        <div style={{ width: 40, height: 40, borderRadius: 6, overflow: 'hidden', background: '#f5f5f5', flexShrink: 0 }}>
-                          {product.images?.[0]
-                            ? <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                            : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📦</div>
-                          }
-                        </div>
-                        <div style={{ flex: 1, overflow: 'hidden' }}>
-                          <div style={{ fontWeight: 600, fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.name}</div>
-                          <div style={{ fontSize: 11, color: '#888' }}>{product.category}</div>
-                        </div>
-                        <span style={{ fontWeight: 700, color: 'var(--tic-orange)', fontSize: 13 }}>₹{product.price}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Desktop: Cart + User */}
-            <div className="col-auto d-none d-md-flex align-items-center gap-2 order-md-3">
-              {/* Cart */}
-              <button className="tic-nav-icon-btn" onClick={() => onNavigate('cart')}>
-                <div className="position-relative">
-                  <ShoppingCart size={22} />
-                  {cartCount > 0 && <span className="tic-cart-badge">{cartCount}</span>}
-                </div>
-                <span className="d-none d-lg-block" style={{ fontWeight: 600, fontSize: 13 }}>Cart</span>
-              </button>
-
-              {/* User */}
-              {currentUser ? (
-                <div className="d-flex align-items-center gap-1">
-                  <button className="tic-nav-icon-btn d-flex flex-column align-items-start" onClick={() => onNavigate('account')} style={{ gap: 0 }}>
-                    <span className="label-sm">Hello, {currentUser.username}</span>
-                    <span className="label-main d-flex align-items-center gap-1"><User size={14} /> Account & Lists</span>
-                  </button>
-                  <button className="tic-nav-icon-btn" onClick={onLogout} title="Sign Out">
-                    <LogOut size={16} />
-                    <span className="d-none d-xl-inline" style={{ fontSize: 13 }}>Sign Out</span>
-                  </button>
-                </div>
-              ) : (
-                <div className="d-flex align-items-center gap-2">
-                  <button className="tic-nav-icon-btn d-flex flex-column align-items-start" onClick={() => onNavigate('login')} style={{ gap: 0 }}>
-                    <span className="label-sm">Hello, sign in</span>
-                    <span className="label-main">Account & Lists</span>
-                  </button>
-                  <button className="tic-register-btn d-none d-xl-block" onClick={() => onNavigate('register')}>Register</button>
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="tic-suggestions">
+                  {suggestions.map(product => (
+                    <button key={product._id} className="tic-sug-item" onClick={() => handleSuggestionClick(product)}>
+                      <div style={{ width: 38, height: 38, borderRadius: 8, overflow: 'hidden', background: '#f5f5f5', flexShrink: 0 }}>
+                        {product.images?.[0]
+                          ? <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📦</div>
+                        }
+                      </div>
+                      <div style={{ flex: 1, overflow: 'hidden' }}>
+                        <div style={{ fontWeight: 600, fontSize: 14, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.name}</div>
+                        <div style={{ fontSize: 12, color: '#888' }}>{product.category}</div>
+                      </div>
+                      <span style={{ fontWeight: 700, color: '#FF6B00', fontSize: 14, flexShrink: 0 }}>₹{product.price}</span>
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
-
           </div>
-        </div>
 
-        {/* ── Category Bar (Desktop) ── */}
-        <div className="tic-category-bar d-none d-md-block">
-          <div className="container-fluid px-3 px-md-4">
-            <div className="d-flex align-items-center justify-content-center flex-wrap gap-2 py-2">
-              <button className={`tic-cat-btn all-btn ${category === 'all' ? 'active' : ''}`} onClick={() => handleCategoryClick('all')}>
-                🛒 All
-              </button>
-              {categories.map(cat => (
-                <button key={cat} className={`tic-cat-btn ${category === cat ? 'active' : ''}`} onClick={() => handleCategoryClick(cat)}>
-                  {cat}
+          {/* Desktop Right: Cart + User */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+            {/* Cart */}
+            <button className="tic-icon-btn" onClick={() => onNavigate('cart')} style={{ position: 'relative' }}>
+              <ShoppingCart size={20} color="#1a1a1a" />
+              {cartCount > 0 && <span className="tic-cart-badge">{cartCount}</span>}
+              <span style={{ fontSize: 13, fontWeight: 600, display: 'none' }} className="d-lg-inline">Cart</span>
+            </button>
+
+            {/* User */}
+            {currentUser ? (
+              <>
+                <button className="tic-icon-btn" onClick={() => onNavigate('account')} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 0 }}>
+                  <span className="sub-label">Hello, {currentUser.username}</span>
+                  <span className="main-label" style={{ display: 'flex', alignItems: 'center', gap: 4 }}><User size={13} /> Account</span>
                 </button>
-              ))}
-            </div>
+                <button className="tic-icon-btn" onClick={onLogout} title="Sign Out">
+                  <LogOut size={17} color="#666" />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="tic-icon-btn" onClick={() => onNavigate('login')} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 0 }}>
+                  <span className="sub-label">Hello, sign in</span>
+                  <span className="main-label">Account &amp; Lists</span>
+                </button>
+                <button className="tic-reg-btn" onClick={() => onNavigate('register')}>Register</button>
+              </>
+            )}
+
+            {/* Mobile hamburger */}
+            <button className="tic-icon-btn d-md-none" onClick={() => setShowMobileMenu(!showMobileMenu)}>
+              {showMobileMenu ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
         </div>
 
-        {/* ── Mobile Menu ── */}
+        {/* ── Category Bar ── */}
+        <div className="tic-cat-bar d-none d-md-block">
+          <div className="tic-cat-list">
+            <button className={`tic-cat-pill all-pill ${category === 'all' ? 'active' : ''}`} onClick={() => handleCategoryClick('all')}>🛒 All</button>
+            {categories.map(cat => (
+              <button key={cat} className={`tic-cat-pill ${category === cat ? 'active' : ''}`} onClick={() => handleCategoryClick(cat)}>{cat}</button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Mobile Drawer ── */}
         {showMobileMenu && (
-          <div className="tic-mobile-menu">
-            <div className="container-fluid px-3 py-3">
-              {/* User section */}
-              <div className="mb-3 pb-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                {currentUser ? (
-                  <div className="d-flex flex-column gap-2">
-                    <span style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <User size={16} /> Hello, {currentUser.username}
-                    </span>
-                    <button className="tic-nav-icon-btn" style={{ width: 'fit-content', border: '1px solid var(--tic-orange)', borderRadius: 6, padding: '6px 14px' }}
-                      onClick={() => { onLogout(); setShowMobileMenu(false); }}>
-                      <LogOut size={15} /> Sign Out
-                    </button>
-                  </div>
-                ) : (
-                  <div className="d-flex gap-2">
-                    <button className="tic-register-btn" style={{ flex: 1 }} onClick={() => { onNavigate('login'); setShowMobileMenu(false); }}>Sign in</button>
-                    <button className="tic-register-btn" style={{ flex: 1, background: 'var(--tic-green)' }} onClick={() => { onNavigate('register'); setShowMobileMenu(false); }}>Register</button>
-                  </div>
-                )}
-              </div>
-              {/* Categories */}
-              <div className="d-flex flex-wrap gap-2">
-                <button className={`tic-cat-btn all-btn ${category === 'all' ? 'active' : ''}`} onClick={() => handleCategoryClick('all')}>All</button>
-                {categories.map(cat => (
-                  <button key={cat} className={`tic-cat-btn ${category === cat ? 'active' : ''}`} onClick={() => handleCategoryClick(cat)}>{cat}</button>
-                ))}
-              </div>
+          <div className="tic-mobile-drawer">
+            <div style={{ marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid #f0f0f0' }}>
+              {currentUser ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <span style={{ fontSize: 13, color: '#444', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <User size={14} /> {currentUser.username}
+                  </span>
+                  <button className="tic-icon-btn" style={{ width: 'fit-content', border: '1px solid #ddd', borderRadius: 8 }}
+                    onClick={() => { onLogout(); setShowMobileMenu(false); }}>
+                    <LogOut size={14} /> Sign Out
+                  </button>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button className="tic-reg-btn" style={{ flex: 1 }} onClick={() => { onNavigate('login'); setShowMobileMenu(false); }}>Sign in</button>
+                  <button className="tic-reg-btn" style={{ flex: 1, background: '#1a7a2e' }} onClick={() => { onNavigate('register'); setShowMobileMenu(false); }}>Register</button>
+                </div>
+              )}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              <button className={`tic-cat-pill all-pill ${category === 'all' ? 'active' : ''}`} onClick={() => handleCategoryClick('all')}>All</button>
+              {categories.map(cat => (
+                <button key={cat} className={`tic-cat-pill ${category === cat ? 'active' : ''}`} onClick={() => handleCategoryClick(cat)}>{cat}</button>
+              ))}
             </div>
           </div>
         )}

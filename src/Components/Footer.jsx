@@ -22,7 +22,15 @@ const Footer = () => {
             <div className="col-12 col-lg-6">
               <div className="d-flex align-items-center gap-2 mb-3">
                              <button className="tic-logo-btn" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                               <img src={Logo} alt="The Indian Commerce" />
+                                    <button className="tic-logo-wrap">
+                                           <img src={Logo} alt="TIC" />
+                                           <div className="tic-brand-text">
+                                             <div className="tic-brand-main">
+                                               <span className="the">the</span><span className="indian">indian</span><span className="commerce">commerce</span>
+                                             </div>
+                                             <div className="tic-brand-sub">Connect · Grow · Succeed</div>
+                                           </div>
+                                         </button>
                              </button>
               </div>
               <p className="text-white-50 mb-0" style={{ fontSize: '14px', lineHeight: '1.6' }}>
